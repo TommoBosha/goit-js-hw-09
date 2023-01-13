@@ -33,7 +33,7 @@ function createPromise(position, delay) {
   });
 }
 function onResolve({ position, delay }) {
-  Notify.success(` Fulfilled promise ${position} in ${delay}ms`, { duration: 3000, });
+  Notify.success(` Fulfilled promise ${position} in ${delay}ms`, { duration: 2000, });
 }
 
 function onReject({ position, delay }) {
