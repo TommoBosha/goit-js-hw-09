@@ -8,28 +8,30 @@ function onFormSubmit(event) {
   event.preventDefault();
 
   const { delay, step, amount } = event.currentTarget;
-  const delayNum = Number(delay.value);
+  let delayNum = Number(delay.value);
   const stepNum = Number(step.value);
   const amountNum = Number(amount.value);
 
-  for (let i = 0; i < amountNum; i += 1) {
-    createPromise(i + 1, delayNum + i * stepNum)
+  for (let i = 1; i <= amountNum; i += 1) {
+    createPromise(i, delayNum)
       .then(onResolve)
       .catch(onReject);
+    delayNum += stepNum;
+
   }
 }
 
 
 function createPromise(position, delay) {
+  const shouldResolve = Math.random() > 0.3;
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      const shouldResolve = Math.random() > 0.3;
       if (shouldResolve) {
         resolve({ position, delay });
       } else {
         reject({ position, delay });
       }
-    },);
+    }, delay);
   });
 }
 function onResolve({ position, delay }) {
